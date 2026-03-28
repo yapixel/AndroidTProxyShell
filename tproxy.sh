@@ -166,7 +166,7 @@ load_config() {
 
     if [ -f "$CONFIG_DIR/tproxy.conf" ]; then
         log Info "Sourcing configuration file: $CONFIG_DIR/tproxy.conf"
-        source "$CONFIG_DIR/tproxy.conf"
+        . "$CONFIG_DIR/tproxy.conf"
     else
         log Info "No tproxy.conf found in $CONFIG_DIR, using script defaults + environment variables"
     fi
@@ -310,7 +310,7 @@ load_runtime_config() {
     local runtime_file="$CONFIG_DIR/runtime_tproxy.conf"
     if [ -f "$runtime_file" ]; then
         log Info "Loading runtime config from $runtime_file for cleanup"
-        source "$runtime_file" || {
+        . "$runtime_file" || {
             log Warn "Failed to load runtime config from $runtime_file, using current config"
             return 1
         }
